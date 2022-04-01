@@ -28,7 +28,12 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \zzbajie\snowflake\AutoloadExample::widget(); ?>```
+//生成订单号
+$redis = Yii::$app->redis;
+$redis->select(9);
+$snowflake = new Snowflake($redis, Yii::$app->params['snowFlake']['machineId'], Yii::$app->params['snowFlake']['startTime'], 'order');
+return (string)$snowflake->generate();
+```
 
 # snowflake
 该版本使用到了PHP7语法，并使用REDIS来作为锁机制
